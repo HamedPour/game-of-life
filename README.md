@@ -4,7 +4,7 @@ One of Mr OMGTechy's Little Challenges.
 
 see [The Game of Life](https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life)
 
-[Look at them little cell goooo](https://hamedpour.github.io/game-of-life/)
+[Look at them little cells goooo](https://hamedpour.github.io/game-of-life/)
 
 ## Challenge Breakdown
 
