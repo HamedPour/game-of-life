@@ -1,6 +1,8 @@
 const canvas = document.querySelector("canvas");
 const ctx = canvas.getContext("2d");
 
+// Global Vars
+
 canvas.width = 600;
 canvas.height = 600;
 
@@ -8,6 +10,7 @@ const ROWS = 60;
 const COLS = 60;
 const RES = 10;
 
+// Grid setup
 function createGrid() {
   // Thank Zeus for ES6
   return new Array(COLS)
@@ -17,11 +20,13 @@ function createGrid() {
     );
 }
 
+// Next generation grid
 function nextGeneration(grid) {
   let nextGrid = grid.map((row) => [...row]);
   // loop through ever cell in the grid
   for (let row = 0; row < grid.length; row++) {
     for (let col = 0; col < grid[row].length; col++) {
+      // Each Cell
       let cell = grid[row][col];
 
       let neighbourhoodLivingTotal = 0;
@@ -65,11 +70,13 @@ function nextGeneration(grid) {
   return nextGrid;
 }
 
+// Initialisation of first grid passed on into second
 let nextGrid = nextGeneration(createGrid());
-function animate() {
-  // Techy said slow it down ...
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
 
+// Animation Loop
+function animate() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  // Set Timeout function to slow animation down
   setTimeout(() => {
     requestAnimationFrame(animate);
   }, 70);

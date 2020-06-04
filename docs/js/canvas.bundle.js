@@ -106,12 +106,13 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToAr
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
 var canvas = document.querySelector("canvas");
-var ctx = canvas.getContext("2d");
+var ctx = canvas.getContext("2d"); // Global Vars
+
 canvas.width = 600;
 canvas.height = 600;
 var ROWS = 60;
 var COLS = 60;
-var RES = 10;
+var RES = 10; // Grid setup
 
 function createGrid() {
   // Thank Zeus for ES6
@@ -120,7 +121,8 @@ function createGrid() {
       return Math.round(Math.random() * 1);
     });
   });
-}
+} // Next generation grid
+
 
 function nextGeneration(grid) {
   var nextGrid = grid.map(function (row) {
@@ -129,6 +131,7 @@ function nextGeneration(grid) {
 
   for (var row = 0; row < grid.length; row++) {
     for (var col = 0; col < grid[row].length; col++) {
+      // Each Cell
       var cell = grid[row][col];
       var neighbourhoodLivingTotal = 0; // loop through a 3 by 3 grid around each cell
 
@@ -171,13 +174,14 @@ function nextGeneration(grid) {
   }
 
   return nextGrid;
-}
+} // Initialisation of first grid passed on into second
 
-var nextGrid = nextGeneration(createGrid());
+
+var nextGrid = nextGeneration(createGrid()); // Animation Loop
 
 function animate() {
-  // Techy said slow it down ...
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  ctx.clearRect(0, 0, canvas.width, canvas.height); // Set Timeout function to slow animation down
+
   setTimeout(function () {
     requestAnimationFrame(animate);
   }, 70);
