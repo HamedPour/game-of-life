@@ -109,9 +109,9 @@ var canvas = document.querySelector("canvas");
 var ctx = canvas.getContext("2d");
 canvas.width = 600;
 canvas.height = 600;
-var ROWS = 50;
-var COLS = 50;
-var RES = 10;
+var ROWS = 5;
+var COLS = 5;
+var RES = 50;
 
 function createGrid() {
   // Thank Zeus for ES6
@@ -120,13 +120,13 @@ function createGrid() {
       return Math.round(Math.random() * 1);
     });
   });
-} // // Test Little Grid
-// let grid = [
-//   [1, 1, 1],
-//   [0, 0, 0],
-//   [0, 0, 0],
-// ];
+} // something here is not quiet right.
+// let nextGrid = nextGeneration(createGrid());
+// Test Little Grid
 
+
+var grid = [[0, 0, 0, 0, 0], [0, 0, 0, 0, 0], [0, 1, 1, 1, 0], [0, 0, 0, 0, 0], [0, 0, 0, 0, 0]];
+var nextGrid = nextGeneration(grid);
 
 function nextGeneration(grid) {
   var nextGrid = grid.map(function (row) {
@@ -177,13 +177,12 @@ function nextGeneration(grid) {
   }
 
   return nextGrid;
-} // something here is not quiet right.
-
-
-var nextGrid = nextGeneration(createGrid());
+}
 
 function animate() {
-  requestAnimationFrame(animate);
+  setTimeout(function () {
+    requestAnimationFrame(animate);
+  }, 1000);
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   nextGeneration(nextGrid);
 }

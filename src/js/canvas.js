@@ -4,9 +4,9 @@ const ctx = canvas.getContext("2d");
 canvas.width = 600;
 canvas.height = 600;
 
-const ROWS = 50;
-const COLS = 50;
-const RES = 10;
+const ROWS = 5;
+const COLS = 5;
+const RES = 50;
 
 function createGrid() {
   // Thank Zeus for ES6
@@ -17,12 +17,18 @@ function createGrid() {
     );
 }
 
-// // Test Little Grid
-// let grid = [
-//   [1, 1, 1],
-//   [0, 0, 0],
-//   [0, 0, 0],
-// ];
+// something here is not quiet right.
+// let nextGrid = nextGeneration(createGrid());
+
+// Test Little Grid
+let grid = [
+  [0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0],
+  [0, 1, 1, 1, 0],
+  [0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0],
+];
+let nextGrid = nextGeneration(grid);
 
 function nextGeneration(grid) {
   let nextGrid = grid.map((row) => [...row]);
@@ -72,11 +78,10 @@ function nextGeneration(grid) {
   return nextGrid;
 }
 
-// something here is not quiet right.
-let nextGrid = nextGeneration(createGrid());
-
 function animate() {
-  requestAnimationFrame(animate);
+  setTimeout(() => {
+    requestAnimationFrame(animate);
+  }, 1000);
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   nextGeneration(nextGrid);
 }
