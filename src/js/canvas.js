@@ -4,8 +4,8 @@ const ctx = canvas.getContext("2d");
 canvas.width = 600;
 canvas.height = 600;
 
-const ROWS = 50;
-const COLS = 50;
+const ROWS = 60;
+const COLS = 60;
 const RES = 10;
 
 function createGrid() {
@@ -17,11 +17,13 @@ function createGrid() {
     );
 }
 
-// // Test Little Grid
+// Test Little Grid
 // let grid = [
-//   [1, 1, 1],
-//   [0, 0, 0],
-//   [0, 0, 0],
+//   [0, 0, 0, 0, 0],
+//   [0, 0, 1, 1, 1],
+//   [0, 1, 1, 1, 0],
+//   [0, 0, 0, 0, 0],
+//   [0, 0, 0, 0, 0],
 // ];
 
 function nextGeneration(grid) {
@@ -51,13 +53,13 @@ function nextGeneration(grid) {
 
       // underpopulation -> dead
       if (cell === 1 && neighbourhoodLivingTotal < 2) {
-        grid[row][col] = 0;
+        nextGrid[row][col] = 0;
       } else if (cell === 1 && neighbourhoodLivingTotal > 3) {
         // overpopulation -> dead
-        grid[row][col] = 0;
+        nextGrid[row][col] = 0;
       } else if ((cell === 0) & (neighbourhoodLivingTotal === 3)) {
         // production -> live
-        grid[row][col] = 1;
+        nextGrid[row][col] = 1;
       }
 
       // visualise the grid
@@ -72,13 +74,14 @@ function nextGeneration(grid) {
   return nextGrid;
 }
 
-// something here is not quiet right.
 let nextGrid = nextGeneration(createGrid());
 
 function animate() {
-  requestAnimationFrame(animate);
   ctx.clearRect(0, 0, canvas.width, canvas.height);
-  nextGeneration(nextGrid);
+  setTimeout(() => {
+    requestAnimationFrame(animate);
+  }, 70);
+  nextGrid = nextGeneration(nextGrid);
 }
 
 animate();
