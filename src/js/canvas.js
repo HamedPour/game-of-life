@@ -17,15 +17,6 @@ function createGrid() {
     );
 }
 
-// Test Little Grid
-// let grid = [
-//   [0, 0, 0, 0, 0],
-//   [0, 0, 1, 1, 1],
-//   [0, 1, 1, 1, 0],
-//   [0, 0, 0, 0, 0],
-//   [0, 0, 0, 0, 0],
-// ];
-
 function nextGeneration(grid) {
   let nextGrid = grid.map((row) => [...row]);
   // loop through ever cell in the grid
@@ -75,9 +66,10 @@ function nextGeneration(grid) {
 }
 
 let nextGrid = nextGeneration(createGrid());
-
 function animate() {
+  // Techy said slow it down ...
   ctx.clearRect(0, 0, canvas.width, canvas.height);
+
   setTimeout(() => {
     requestAnimationFrame(animate);
   }, 70);

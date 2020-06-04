@@ -120,15 +120,7 @@ function createGrid() {
       return Math.round(Math.random() * 1);
     });
   });
-} // Test Little Grid
-// let grid = [
-//   [0, 0, 0, 0, 0],
-//   [0, 0, 1, 1, 1],
-//   [0, 1, 1, 1, 0],
-//   [0, 0, 0, 0, 0],
-//   [0, 0, 0, 0, 0],
-// ];
-
+}
 
 function nextGeneration(grid) {
   var nextGrid = grid.map(function (row) {
@@ -184,6 +176,7 @@ function nextGeneration(grid) {
 var nextGrid = nextGeneration(createGrid());
 
 function animate() {
+  // Techy said slow it down ...
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   setTimeout(function () {
     requestAnimationFrame(animate);
