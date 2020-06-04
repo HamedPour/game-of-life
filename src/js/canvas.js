@@ -23,12 +23,11 @@ function createGrid() {
 // Test Little Grid
 let grid = [
   [0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0],
+  [0, 0, 1, 1, 1],
   [0, 1, 1, 1, 0],
   [0, 0, 0, 0, 0],
   [0, 0, 0, 0, 0],
 ];
-let nextGrid = nextGeneration(grid);
 
 function nextGeneration(grid) {
   let nextGrid = grid.map((row) => [...row]);
@@ -57,13 +56,13 @@ function nextGeneration(grid) {
 
       // underpopulation -> dead
       if (cell === 1 && neighbourhoodLivingTotal < 2) {
-        grid[row][col] = 0;
+        nextGrid[row][col] = 0;
       } else if (cell === 1 && neighbourhoodLivingTotal > 3) {
         // overpopulation -> dead
-        grid[row][col] = 0;
+        nextGrid[row][col] = 0;
       } else if ((cell === 0) & (neighbourhoodLivingTotal === 3)) {
         // production -> live
-        grid[row][col] = 1;
+        nextGrid[row][col] = 1;
       }
 
       // visualise the grid
@@ -78,11 +77,15 @@ function nextGeneration(grid) {
   return nextGrid;
 }
 
+let nextGrid = nextGeneration(grid);
 function animate() {
+  // Techy said slow it down ...
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  let nextGrid = nextGeneration(grid);
+
   setTimeout(() => {
     requestAnimationFrame(animate);
-  }, 1000);
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  }, 800);
   nextGeneration(nextGrid);
 }
 

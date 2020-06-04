@@ -125,8 +125,7 @@ function createGrid() {
 // Test Little Grid
 
 
-var grid = [[0, 0, 0, 0, 0], [0, 0, 0, 0, 0], [0, 1, 1, 1, 0], [0, 0, 0, 0, 0], [0, 0, 0, 0, 0]];
-var nextGrid = nextGeneration(grid);
+var grid = [[0, 0, 0, 0, 0], [0, 0, 1, 1, 1], [0, 1, 1, 1, 0], [0, 0, 0, 0, 0], [0, 0, 0, 0, 0]];
 
 function nextGeneration(grid) {
   var nextGrid = grid.map(function (row) {
@@ -157,13 +156,13 @@ function nextGeneration(grid) {
 
 
       if (cell === 1 && neighbourhoodLivingTotal < 2) {
-        grid[row][col] = 0;
+        nextGrid[row][col] = 0;
       } else if (cell === 1 && neighbourhoodLivingTotal > 3) {
         // overpopulation -> dead
-        grid[row][col] = 0;
+        nextGrid[row][col] = 0;
       } else if (cell === 0 & neighbourhoodLivingTotal === 3) {
         // production -> live
-        grid[row][col] = 1;
+        nextGrid[row][col] = 1;
       } // visualise the grid
 
 
@@ -179,11 +178,15 @@ function nextGeneration(grid) {
   return nextGrid;
 }
 
+var nextGrid = nextGeneration(grid);
+
 function animate() {
+  // Techy said slow it down ...
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  var nextGrid = nextGeneration(grid);
   setTimeout(function () {
     requestAnimationFrame(animate);
-  }, 1000);
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  }, 800);
   nextGeneration(nextGrid);
 }
 
